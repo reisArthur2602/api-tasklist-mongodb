@@ -1,7 +1,7 @@
 import { StatusCodes } from 'http-status-codes';
 import { CreateTaskService } from '../../services/task/create-task';
 import { HttpRequest, HttpResponse } from '../helpers/http';
-import { TaskProps, TaskResponse } from '../../models/taskModel';
+import { TaskProps, TaskResponse } from '../../models/TaskModel';
 import { TaskSchema } from '../../utils/validator/taskSchema';
 
 export const CreateTaskController = async (
@@ -19,7 +19,7 @@ export const CreateTaskController = async (
     return { statusCode: StatusCodes.CREATED, body: task };
   } catch (error: any) {
     return {
-      statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
+      statusCode: StatusCodes.CONFLICT,
       body: error.message,
     };
   }
