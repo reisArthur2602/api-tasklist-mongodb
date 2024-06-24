@@ -2,7 +2,7 @@ import { StatusCodes } from 'http-status-codes';
 import { HttpRequest, HttpResponse } from '../../helpers/http';
 import { TaskResponse } from '../../../models/TaskModel';
 import { LateTaskService } from '../../../services/task/filter-task/late-task';
-
+import { isValidMACAddress } from '../../../utils/isValidMACAddress';
 
 export const LateTaskController = async (
   params: HttpRequest<any>
@@ -10,6 +10,14 @@ export const LateTaskController = async (
   try {
     const macaddress = params.params.macaddress as string;
 
+    if (macaddress) {
+      const isValid = isValidMACAddress(macaddress);
+      if (!isValid)
+        return {
+          statusCode: StatusCodes.BAD_REQUEST,
+          body: 'Endereço MAC inválido',
+        };
+    }
     const tasks = await LateTaskService(macaddress);
 
     return {
