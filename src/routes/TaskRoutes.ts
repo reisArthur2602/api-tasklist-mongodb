@@ -5,8 +5,10 @@ import {
   DeleteTaskController,
   DoneTaskController,
   GetTaskController,
+  LateTaskController,
   UpdateTaskController,
 } from '../controllers/task';
+
 
 export const TaskRoute = Router();
 
@@ -46,6 +48,12 @@ TaskRoute.patch('/:id/:done', async (req, res) => {
 
 TaskRoute.get('/filter/all/:macaddress?', async (req, res) => {
   const { statusCode, body } = await AllTaskController({
+    params: req.params,
+  });
+  return res.status(statusCode).json(body);
+});
+TaskRoute.get('/filter/late/:macaddress?', async (req, res) => {
+  const { statusCode, body } = await LateTaskController({
     params: req.params,
   });
   return res.status(statusCode).json(body);
