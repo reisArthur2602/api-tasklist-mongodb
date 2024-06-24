@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import {
   CreateTaskController,
+  DeleteTaskController,
   UpdateTaskController,
 } from '../controllers/task';
 
@@ -14,6 +15,13 @@ TaskRoute.post('/', async (req, res) => {
 TaskRoute.put('/:id', async (req, res) => {
   const { statusCode, body } = await UpdateTaskController({
     body: req.body,
+    params: req.params,
+  });
+  return res.status(statusCode).json(body);
+});
+
+TaskRoute.delete('/:id', async (req, res) => {
+  const { statusCode, body } = await DeleteTaskController({
     params: req.params,
   });
   return res.status(statusCode).json(body);
