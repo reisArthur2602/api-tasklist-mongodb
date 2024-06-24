@@ -6,9 +6,10 @@ import {
   DoneTaskController,
   GetTaskController,
   LateTaskController,
+  TodayTaskController,
   UpdateTaskController,
+  WeekTaskController,
 } from '../controllers/task';
-
 
 export const TaskRoute = Router();
 
@@ -52,8 +53,23 @@ TaskRoute.get('/filter/all/:macaddress?', async (req, res) => {
   });
   return res.status(statusCode).json(body);
 });
+
 TaskRoute.get('/filter/late/:macaddress?', async (req, res) => {
   const { statusCode, body } = await LateTaskController({
+    params: req.params,
+  });
+  return res.status(statusCode).json(body);
+});
+
+TaskRoute.get('/filter/today/:macaddress?', async (req, res) => {
+  const { statusCode, body } = await TodayTaskController({
+    params: req.params,
+  });
+  return res.status(statusCode).json(body);
+});
+
+TaskRoute.get('/filter/week/:macaddress?', async (req, res) => {
+  const { statusCode, body } = await WeekTaskController({
     params: req.params,
   });
   return res.status(statusCode).json(body);
