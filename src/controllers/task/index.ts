@@ -3,8 +3,7 @@ export * from './update-task';
 export * from './delete-task';
 export * from './get-task';
 export * from './done-task';
-export * from './all-task';
-export * from './late-task';
-export * from './today-task';
-export * from './week-task';
-
+export * from './filter-task/all-task';
+export * from './filter-task/late-task';
+export * from './filter-task/today-task';
+export * from './filter-task/week-task';

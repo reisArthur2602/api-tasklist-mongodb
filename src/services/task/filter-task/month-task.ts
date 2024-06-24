@@ -1,8 +1,8 @@
-import { endOfDay, endOfWeek, startOfDay, startOfWeek } from 'date-fns';
-import { db } from '../../db/prisma';
-import { TaskResponse } from '../../models/TaskModel';
+import { endOfYear, startOfYear } from 'date-fns';
+import { db } from '../../../db/prisma';
+import { TaskResponse } from '../../../models/TaskModel';
 
-export const WeekTaskService = async (
+export const MonthTaskService = async (
   macaddress?: string
 ): Promise<TaskResponse[]> => {
   const current = new Date();
@@ -11,17 +11,18 @@ export const WeekTaskService = async (
     ...(macaddress
       ? {
           macaddress,
-          when: { gte: startOfWeek(current), lte: endOfWeek(current) },
+          when: { gte: startOfYear(current), lte: endOfYear(current) },
         }
       : {
           isGuest: true,
-          when: { gte: startOfWeek(current), lte: endOfWeek(current) },
+          when: { gte: startOfYear(current), lte: endOfYear(current) },
         }),
   };
 
   return await db.task
     .findMany({
       where: filter,
+      orderBy: { when: 'asc' },
     })
     .then((res) => {
       if (res.length === 0) throw new Error('Nenhuma tarefa encontrada');

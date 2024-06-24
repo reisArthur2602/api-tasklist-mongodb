@@ -1,8 +1,8 @@
 import { StatusCodes } from 'http-status-codes';
-import { TaskResponse } from '../../models/TaskModel';
-import { HttpRequest, HttpResponse } from '../helpers/http';
-import { AllTaskService } from '../../services/task/all-task';
-import { LateTaskService } from '../../services/task/late-task';
+import { HttpRequest, HttpResponse } from '../../helpers/http';
+import { TaskResponse } from '../../../models/TaskModel';
+import { LateTaskService } from '../../../services/task/filter-task/late-task';
+
 
 export const LateTaskController = async (
   params: HttpRequest<any>

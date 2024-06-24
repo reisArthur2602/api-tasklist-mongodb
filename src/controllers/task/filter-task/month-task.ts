@@ -1,15 +1,16 @@
 import { StatusCodes } from 'http-status-codes';
-import { TaskResponse } from '../../models/TaskModel';
-import { HttpRequest, HttpResponse } from '../helpers/http';
-import { TodayTaskService } from '../../services/task/today-task';
+import { TaskResponse } from '../../../models/TaskModel';
+import { HttpRequest, HttpResponse } from '../../helpers/http';
+import { MonthTaskService } from '../../../services/task/filter-task/month-task';
 
-export const TodayTaskController = async (
+
+export const MonthTaskController = async (
   params: HttpRequest<any>
 ): Promise<HttpResponse<TaskResponse[] | string>> => {
   try {
     const macaddress = params.params.macaddress as string;
 
-    const tasks = await TodayTaskService(macaddress);
+    const tasks = await MonthTaskService(macaddress);
 
     return {
       statusCode: StatusCodes.ACCEPTED,

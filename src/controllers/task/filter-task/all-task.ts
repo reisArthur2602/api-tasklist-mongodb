@@ -1,7 +1,7 @@
 import { StatusCodes } from 'http-status-codes';
-import { TaskResponse } from '../../models/TaskModel';
-import { HttpRequest, HttpResponse } from '../helpers/http';
-import { AllTaskService } from '../../services/task/all-task';
+import { TaskResponse } from '../../../models/TaskModel';
+import { HttpRequest, HttpResponse } from '../../helpers/http';
+import { AllTaskService } from '../../../services/task/filter-task/all-task';
 
 export const AllTaskController = async (
   params: HttpRequest<any>

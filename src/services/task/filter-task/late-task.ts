@@ -1,11 +1,9 @@
-
-import { db } from '../../db/prisma';
-import { TaskResponse } from '../../models/TaskModel';
+import { db } from '../../../db/prisma';
+import { TaskResponse } from '../../../models/TaskModel';
 
 export const LateTaskService = async (
   macaddress?: string
 ): Promise<TaskResponse[]> => {
-  
   const current = new Date();
 
   const filter = {
@@ -17,6 +15,7 @@ export const LateTaskService = async (
   return await db.task
     .findMany({
       where: filter,
+      orderBy: { when: 'asc' },
     })
     .then((res) => {
       if (res.length === 0) throw new Error('Nenhuma tarefa encontrada');

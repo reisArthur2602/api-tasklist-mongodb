@@ -1,8 +1,8 @@
 import { endOfYear, startOfYear } from 'date-fns';
-import { db } from '../../db/prisma';
-import { TaskResponse } from '../../models/TaskModel';
+import { db } from '../../../db/prisma';
+import { TaskResponse } from '../../../models/TaskModel';
 
-export const MonthTaskService = async (
+export const YearTaskService = async (
   macaddress?: string
 ): Promise<TaskResponse[]> => {
   const current = new Date();
@@ -22,7 +22,7 @@ export const MonthTaskService = async (
   return await db.task
     .findMany({
       where: filter,
-  
+      orderBy: { when: 'asc' },
     })
     .then((res) => {
       if (res.length === 0) throw new Error('Nenhuma tarefa encontrada');

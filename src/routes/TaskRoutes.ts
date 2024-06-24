@@ -10,7 +10,8 @@ import {
   UpdateTaskController,
   WeekTaskController,
 } from '../controllers/task';
-import { MonthTaskController } from '../controllers/task/month-task';
+import { YearTaskController } from '../controllers/task/filter-task/year-task';
+import { MonthTaskController } from '../controllers/task/filter-task/month-task';
 
 export const TaskRoute = Router();
 
@@ -48,6 +49,7 @@ TaskRoute.patch('/:id/:done', async (req, res) => {
   return res.status(statusCode).json(body);
 });
 
+// filter
 TaskRoute.get('/filter/all/:macaddress?', async (req, res) => {
   const { statusCode, body } = await AllTaskController({
     params: req.params,
@@ -76,6 +78,12 @@ TaskRoute.get('/filter/week/:macaddress?', async (req, res) => {
   return res.status(statusCode).json(body);
 });
 
+TaskRoute.get('/filter/year/:macaddress?', async (req, res) => {
+  const { statusCode, body } = await YearTaskController({
+    params: req.params,
+  });
+  return res.status(statusCode).json(body);
+});
 TaskRoute.get('/filter/month/:macaddress?', async (req, res) => {
   const { statusCode, body } = await MonthTaskController({
     params: req.params,
