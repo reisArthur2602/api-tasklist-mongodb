@@ -2,6 +2,7 @@ import { StatusCodes } from 'http-status-codes';
 import { TaskResponse } from '../../../models/TaskModel';
 import { HttpRequest, HttpResponse } from '../../helpers/http';
 import { YearTaskService } from '../../../services/task/filter-task/year-task';
+import { isValidMACAddress } from '../../../utils/IsValidMACAddress';
 
 export const YearTaskController = async (
   params: HttpRequest<any>
@@ -9,6 +10,12 @@ export const YearTaskController = async (
   try {
     const macaddress = params.params.macaddress as string;
 
+    if (!isValidMACAddress(macaddress))
+      return {
+        statusCode: StatusCodes.BAD_REQUEST,
+        body: 'Endereço MAC inválido',
+      };
+      
     const tasks = await YearTaskService(macaddress);
 
     return {

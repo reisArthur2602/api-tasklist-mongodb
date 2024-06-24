@@ -1,9 +1,7 @@
 import { z } from 'zod';
+import { isValidMACAddress } from '../IsValidMACAddress';
 
-const isValidMACAddress = (mac: string) => {
-  const macRegex = /^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$/;
-  return macRegex.test(mac);
-};
+
 
 export const TaskSchema = z.object({
   macaddress: z.string().refine((mac) => isValidMACAddress(mac)).optional(),
