@@ -11,11 +11,17 @@ export const MonthTaskService = async (
     ...(macaddress
       ? {
           macaddress,
-          when: { gte: startOfYear(current), lte: endOfYear(current) },
+          when: {
+            gte: startOfYear(current) && current,
+            lte: endOfYear(current),
+          },
         }
       : {
           isGuest: true,
-          when: { gte: startOfYear(current), lte: endOfYear(current) },
+          when: {
+            gte: startOfYear(current) && current,
+            lte: endOfYear(current),
+          },
         }),
   };
 

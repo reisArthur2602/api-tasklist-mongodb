@@ -11,11 +11,11 @@ export const TodayTaskService = async (
     ...(macaddress
       ? {
           macaddress,
-          when: { gte: startOfDay(current), lte: endOfDay(current) },
+          when: { gte: startOfDay(current) && current, lte: endOfDay(current) },
         }
       : {
           isGuest: true,
-          when: { gte: startOfDay(current), lte: endOfDay(current) },
+          when: { gte: startOfDay(current) && current, lte: endOfDay(current) },
         }),
   };
 

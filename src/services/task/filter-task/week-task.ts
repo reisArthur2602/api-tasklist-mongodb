@@ -11,11 +11,11 @@ export const WeekTaskService = async (
     ...(macaddress
       ? {
           macaddress,
-          when: { gte: startOfWeek(current), lte: endOfWeek(current) },
+          when: { gte: startOfWeek(current) && current, lte: endOfWeek(current) },
         }
       : {
           isGuest: true,
-          when: { gte: startOfWeek(current), lte: endOfWeek(current) },
+          when: { gte: startOfWeek(current) && current, lte: endOfWeek(current) },
         }),
   };
 
