@@ -10,6 +10,7 @@ import {
   UpdateTaskController,
   WeekTaskController,
 } from '../controllers/task';
+import { MonthTaskController } from '../controllers/task/month-task';
 
 export const TaskRoute = Router();
 
@@ -70,6 +71,13 @@ TaskRoute.get('/filter/today/:macaddress?', async (req, res) => {
 
 TaskRoute.get('/filter/week/:macaddress?', async (req, res) => {
   const { statusCode, body } = await WeekTaskController({
+    params: req.params,
+  });
+  return res.status(statusCode).json(body);
+});
+
+TaskRoute.get('/filter/month/:macaddress?', async (req, res) => {
+  const { statusCode, body } = await MonthTaskController({
     params: req.params,
   });
   return res.status(statusCode).json(body);
