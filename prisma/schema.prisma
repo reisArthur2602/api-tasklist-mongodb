@@ -15,11 +15,12 @@ datasource db {
 
 model Task {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  macaddress  String
+  macaddress  String?
   type        Int
   title       String
   description String
   when        DateTime
   done        Boolean  @default(false)
+  isGuest     Boolean  @default(true)
   created     DateTime @default(now())
 }

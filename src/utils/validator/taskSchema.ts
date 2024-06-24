@@ -6,7 +6,7 @@ const isValidMACAddress = (mac: string) => {
 };
 
 export const TaskSchema = z.object({
-  macaddress: z.string().refine((mac) => isValidMACAddress(mac)),
+  macaddress: z.string().refine((mac) => isValidMACAddress(mac)).optional(),
   type: z.number(),
   title: z.string(),
   description: z.string(),
