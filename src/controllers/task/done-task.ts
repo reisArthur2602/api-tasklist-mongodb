@@ -9,7 +9,7 @@ export const DoneTaskController = async (
   try {
     const id = params.params.id as string;
     const done = params.params.done === "true";
-console.log(done)
+
     const task = await DoneTaskService(id, done);
     return { statusCode: StatusCodes.ACCEPTED, body: task };
   } catch (error: any) {
