@@ -2,10 +2,21 @@ import { db } from '../../db/prisma';
 import { TaskProps } from '../../models/TaskModel';
 
 export const UpdateTaskService = async (id: string, data: TaskProps) => {
-  const existsDate = await db.task.findFirst({
-    where: { id: { not: id }, when: data.when, macaddress: data.macaddress },
-  });
+  const filter = {
+    ...(data.macaddress
+      ? {
+          id: { not: id },
+          when: data.when,
+          macaddress: data.macaddress,
+          isGuest: false,
+        }
+      : { id: { not: id }, when: data.when, isGuest: true }),
+  };
 
+  const existsDate = await db.task.findFirst({
+    where: { AND: filter },
+  });
+  console.log(existsDate);
   if (existsDate) throw new Error('Já existe uma tarefa neste dia e horário');
 
   return await db.task
