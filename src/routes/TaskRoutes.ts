@@ -2,6 +2,7 @@ import { Router } from 'express';
 import {
   CreateTaskController,
   DeleteTaskController,
+  DoneTaskController,
   GetTaskController,
   UpdateTaskController,
 } from '../controllers/task';
@@ -13,9 +14,23 @@ TaskRoute.post('/', async (req, res) => {
   return res.status(statusCode).json(body);
 });
 
+TaskRoute.patch('/:id/:done', async (req, res) => {
+  const { statusCode, body } = await DoneTaskController({
+    params: req.params,
+  });
+  return res.status(statusCode).json(body);
+});
+
 TaskRoute.put('/:id', async (req, res) => {
   const { statusCode, body } = await UpdateTaskController({
     body: req.body,
+    params: req.params,
+  });
+  return res.status(statusCode).json(body);
+});
+
+TaskRoute.put('/:id/:done', async (req, res) => {
+  const { statusCode, body } = await DoneTaskController({
     params: req.params,
   });
   return res.status(statusCode).json(body);
