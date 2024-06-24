@@ -1,7 +1,7 @@
 
 
 type TaskProps = {
-  macaddress?: string ;
+  macaddress?: string;
   type: number;
   title: string;
   description: string;

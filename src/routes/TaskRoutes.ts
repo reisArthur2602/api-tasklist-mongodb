@@ -2,6 +2,7 @@ import { Router } from 'express';
 import {
   CreateTaskController,
   DeleteTaskController,
+  GetTaskController,
   UpdateTaskController,
 } from '../controllers/task';
 
@@ -22,6 +23,13 @@ TaskRoute.put('/:id', async (req, res) => {
 
 TaskRoute.delete('/:id', async (req, res) => {
   const { statusCode, body } = await DeleteTaskController({
+    params: req.params,
+  });
+  return res.status(statusCode).json(body);
+});
+
+TaskRoute.get('/:id', async (req, res) => {
+  const { statusCode, body } = await GetTaskController({
     params: req.params,
   });
   return res.status(statusCode).json(body);
