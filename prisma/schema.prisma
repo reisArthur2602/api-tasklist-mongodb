@@ -16,7 +16,7 @@ datasource db {
 model Task {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   macaddress  String?
-  type        Int
+  type        String
   title       String
   description String
   when        DateTime

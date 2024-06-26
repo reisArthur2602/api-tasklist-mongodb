@@ -1,8 +1,18 @@
+import { Task } from "@prisma/client";
 
+enum TypesTask {
+  'code',
+  'work',
+  'study',
+  'gym',
+  'food',
+  'people',
+  'travel',
+}
 
 type TaskProps = {
   macaddress?: string;
-  type: number;
+  type: 'code' | 'work' | 'study' | 'gym' | 'food' | 'people' | 'travel';
   title: string;
   description: string;
   when: Date;
@@ -11,7 +21,7 @@ type TaskProps = {
 type TaskResponse = {
   id: string;
   macaddress: string | null;
-  type: number;
+  type: string;
   title: string;
   description: string;
   when: Date;
@@ -19,5 +29,8 @@ type TaskResponse = {
   isGuest: boolean;
   created: Date;
 };
+
+
+
 
 export { TaskProps, TaskResponse };

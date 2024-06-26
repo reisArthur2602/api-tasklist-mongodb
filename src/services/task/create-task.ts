@@ -7,14 +7,14 @@ export const CreateTaskService = async (
 ): Promise<TaskResponse> => {
   const filter = {
     ...(data.macaddress
-      ? { when: data.when, macaddress: data.macaddress, isGuest: false }
+      ? { when: data.when, macaddress: data.macaddress }
       : { when: data.when, isGuest: true }),
   };
 
   if (isPast(data.when)) throw new Error('Escolha uma data e hora no futuro');
 
   const existsTask = await db.task.findFirst({
-    where: { AND: filter },
+    where: filter,
   });
 
   if (existsTask) throw new Error('Já existe uma tarefa neste dia e horário');

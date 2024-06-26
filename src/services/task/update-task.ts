@@ -8,13 +8,12 @@ export const UpdateTaskService = async (id: string, data: TaskProps) => {
           id: { not: id },
           when: data.when,
           macaddress: data.macaddress,
-          isGuest: false,
         }
       : { id: { not: id }, when: data.when, isGuest: true }),
   };
 
   const existsDate = await db.task.findFirst({
-    where: { AND: filter },
+    where: filter,
   });
 
   if (existsDate) throw new Error('Já existe uma tarefa neste dia e horário');
