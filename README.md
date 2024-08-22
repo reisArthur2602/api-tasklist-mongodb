@@ -1,2 +1,1 @@
-# planner-api
-planner - organizando sua vida
+# api-tasklist-mongodb
